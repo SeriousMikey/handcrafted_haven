@@ -12,8 +12,8 @@ interface Product {
   seller: string;
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
 
   const productResult = await sql<Product[]>`
     SELECT product.name, description, image, price, "user".id AS seller_id, "user".name AS seller
