@@ -12,12 +12,13 @@ interface Product {
   seller: string;
 }
 
+// Server component, no need to await params
 export default async function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const id = params.id;
+    params,
+  }: {
+    params: { id: string };
+  }) {
+  const { id } = params;
 
   const productResult = await sql<Product[]>`
     SELECT product.name, description, image, price, "user".id AS seller_id, "user".name AS seller
@@ -38,7 +39,7 @@ export default async function ProductPage({
       <h3>{product.name}</h3>
       <p>{product.description}</p>
       <p>
-        Creator:{' '}
+        Creator:{" "}
         <Link href={`/seller/${product.seller_id}`}>
           <span>{product.seller}</span>
         </Link>
