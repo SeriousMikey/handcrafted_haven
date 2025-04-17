@@ -14,7 +14,7 @@ export default function Nav() {
                     src={'/images/teddy-bear-3599680_640.jpg'}
                     width={640}
                     height={409}
-                    className={styles.image}
+                    className={styles.icon}
                     alt='Logo'
                 />
             </div>

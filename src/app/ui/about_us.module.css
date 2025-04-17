@@ -1,0 +1,21 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    color: #321e0e;
+    margin-top: 20px;
+}
+
+.image {
+    width: 20%;
+    height: 75%;
+    border-radius: 20px;
+    margin: 50px auto;
+    border: 5px solid #321e0e;
+}
+
+.paragraph {
+    padding: 10px;
+    margin: 20px auto;
+    width: 60%;
+}

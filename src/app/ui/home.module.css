@@ -1,0 +1,34 @@
+.popItemContainer {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 200px;
+}
+
+.popItem {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.popItem a {
+    text-decoration: none;
+    color: #321e0e;
+}
+
+.image {
+    width: 350px;
+    height: 250px;
+    border: 2px solid #321e0e;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 30px;
+    color: #321e0e;
+}
