@@ -12,9 +12,12 @@ interface Product {
   seller: string;
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-    const { id } = params;
-
+export default async function ProductPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const id = params.id;
 
   const productResult = await sql<Product[]>`
     SELECT product.name, description, image, price, "user".id AS seller_id, "user".name AS seller
@@ -31,17 +34,13 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
   return (
     <div>
-      <img
-        src={product.image}
-        alt={product.name}
-      />
-
+      <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
       <p>{product.description}</p>
       <p>
-        Creator: {' '}
+        Creator:{' '}
         <Link href={`/seller/${product.seller_id}`}>
-          <span >{product.seller}</span>
+          <span>{product.seller}</span>
         </Link>
       </p>
       <p>Price: ${Number(product.price).toFixed(2)}</p>
