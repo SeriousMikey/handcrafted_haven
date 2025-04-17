@@ -23,7 +23,7 @@ export default async function SellerPage({ params }: { params: Promise<{ id: str
 
   return (
     <div>
-      <h1>{seller.name}'s Shop</h1>
+      <h1>{seller.name}&apos;s Shop</h1>
 
       {products.length === 0 ? (
         <p>This seller has no products yet.</p>

@@ -56,7 +56,7 @@ export default async function MyProfile() {
         </button>
       </form>
       {products.length === 0 ? (
-        <p>You haven't created any products yet.</p>
+        <p>You haven&apos;t created any products yet.</p>
       ) : (
         <div className={home_styles.popItemContainer}>
           {products.map((product) => (

@@ -27,7 +27,7 @@ export default function Home() {
         }
         const data = await response.json();
         setProducts(data);
-      } catch (err: any) {
+      } catch (err) {
         setError('Error loading products');
         console.error(err);
       }
