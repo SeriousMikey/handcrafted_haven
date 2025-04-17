@@ -4,15 +4,22 @@ export async function GET() {
   try {
     const result = await sql`
       SELECT 
-          name, description, image
+        product.name, 
+        product.description, 
+        product.image, 
+        product.price,
+        product.id,
+        "user".id AS seller_id,
+        "user".name AS seller
       FROM 
-          product
+        product
       JOIN 
-          user ON user.id = product.id
+        "user" ON "user".id = product.user_id
       ORDER BY 
-          product.sales DESC
-      LIMIT 3;
-    `;
+        product.sales DESC
+      LIMIT 3
+    `.execute();
+
 
     return new Response(JSON.stringify(result), {
       status: 200,
