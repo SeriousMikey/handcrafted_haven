@@ -1,9 +1,7 @@
 import { sql } from '@/app/query/sql';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { GetServerSidePropsContext } from 'next';
 
-// Define the interface for the Product
 interface Product {
   name: string;
   description: string;
@@ -14,18 +12,15 @@ interface Product {
   seller: string;
 }
 
-// This will be used for your page props
+// Explicitly define the type for params
 interface ProductPageProps {
   params: { id: string };
 }
 
-// Server component that receives params
-export default async function ProductPage({
-  params,
-}: ProductPageProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = params;
 
-  // Query the database for the product
+  // Query to fetch product data
   const productResult = await sql<Product[]>`
     SELECT product.name, description, image, price, "user".id AS seller_id, "user".name AS seller
     FROM product
@@ -36,7 +31,7 @@ export default async function ProductPage({
   const product = productResult[0];
 
   if (!product) {
-    notFound();
+    notFound(); // Trigger 404 page if no product found
   }
 
   return (
@@ -53,24 +48,4 @@ export default async function ProductPage({
       <p>Price: ${Number(product.price).toFixed(2)}</p>
     </div>
   );
-}
-
-// Fetching server-side props to properly type params in Next.js
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // You can access params here from context.query
-  const { id } = context.params as { id: string };
-
-  // Optionally, handle fetching the product if required in SSR
-  const productResult = await sql<Product[]>`
-    SELECT product.name, description, image, price, "user".id AS seller_id, "user".name AS seller
-    FROM product
-    JOIN "user" ON "user".id = product.user_id
-    WHERE product.id = ${id}
-  `;
-
-  if (!productResult.length) {
-    return { notFound: true }; // Handle not found product
-  }
-
-  return { props: { params: { id } } };
 }
